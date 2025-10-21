@@ -1,73 +1,32 @@
-# React + TypeScript + Vite
+# Alphavantage Intraday Aggregator (C# .NET 8 Minimal API)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project queries Alpha Vantage's `TIME_SERIES_INTRADAY` at 15-minute intervals, groups the last 30 days of bars by day, and returns JSON containing `day`, `lowAverage`, `highAverage`, and `volume`.
 
-Currently, two official plugins are available:
+## Requirements
+- .NET 8 SDK
+- Alpha Vantage API key (set as environment variable `ALPHAVANTAGE_API_KEY`)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Alpha Vantage docs: https://www.alphavantage.co/documentation/ (see TIME_SERIES_INTRADAY). :contentReference[oaicite:1]{index=1}
 
-## React Compiler
+## Setup & Run
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone or create the folder and files as shown.
+2. Set your API key in your environment:
+   - macOS / Linux:
+     ```bash
+     export ALPHAVANTAGE_API_KEY=your_api_key_here
+     ```
+   - Windows (PowerShell):
+     ```powershell
+     $env:ALPHAVANTAGE_API_KEY="your_api_key_here"
+     ```
 
-## Expanding the ESLint configuration
+3. From `src/`:
+   ```bash
+   dotnet restore
+   dotnet run
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Display
+The screen should display "Stock Intraday Data" with a simple search bar right below it. Enter any Stock name and it should return a line chart showing 
+the High/Low average and the volume for the last 30 days. Note that the chart will show less than 30 points as there are no records for weekend days (Saturday and Sunday). 
+Enjoy!
