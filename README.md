@@ -6,7 +6,7 @@ This project queries Alpha Vantage's `TIME_SERIES_INTRADAY` at 15-minute interva
 - .NET 8 SDK
 - Alpha Vantage API key (set as environment variable `ALPHAVANTAGE_API_KEY`)
 
-Alpha Vantage docs: https://www.alphavantage.co/documentation/ (see TIME_SERIES_INTRADAY). :contentReference[oaicite:1]{index=1}
+Alpha Vantage docs: https://www.alphavantage.co/documentation/ (see TIME_SERIES_INTRADAY). 
 
 ## Setup & Run
 
